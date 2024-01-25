@@ -7,6 +7,8 @@ public class PlayerOneControls : MonoBehaviour
     // Variables
     public CharacterController controller;
     public Animator anim;
+    public AudioClip RunningSound;
+    AudioSource audioSource;
 
     public float speed = 4;
     public float rotSpeed = 90;
@@ -21,6 +23,7 @@ public class PlayerOneControls : MonoBehaviour
     {
         controller = GetComponent<CharacterController> ();
         anim = GetComponent<Animator> ();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Game Loop
@@ -36,10 +39,15 @@ public class PlayerOneControls : MonoBehaviour
                 moveDir = new Vector3 (0, 0, 1);
                 moveDir *= speed;
                 moveDir = transform.TransformDirection(moveDir);
+                if(!audioSource.isPlaying){
+                    audioSource.clip = RunningSound;
+                    audioSource.Play();
+                }
             } else {
                 anim.SetInteger("condition", 0);
                 moveDir = new Vector3 (0, 0, 0);
                 running = false;
+                audioSource.Stop();
             }
 
             if (Input.GetKey(KeyCode.Space)){

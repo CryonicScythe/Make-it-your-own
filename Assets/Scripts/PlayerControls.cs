@@ -80,5 +80,8 @@ public class PlayerControls : MonoBehaviour
 
         moveDir.y -= gravity * Time.deltaTime;
         controller.Move(moveDir * Time.deltaTime);
+
+        moveDir.y -= gravity * Time.deltaTime;
+        controller.Move(moveDir * Time.deltaTime);
     }
 }
